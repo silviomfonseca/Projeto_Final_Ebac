@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clonar o repositorio') {
+            steps {
+                git branch: 'main', url: 'https://github.com/silviomfonseca/Projeto_Final_Ebac.git'
+            }
+        }
+        stage('Instalar dependencias') {
+            steps {
+                bat 'cd teste-api && npm install'
+            }
+        }
+        stage('Executar testes') {
+            steps {
+                bat 'cd teste-api && npm run cy:run'
+            }
+        }
+    }
+}
